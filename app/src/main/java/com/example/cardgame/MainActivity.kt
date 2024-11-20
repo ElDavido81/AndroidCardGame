@@ -2,6 +2,7 @@ package com.example.cardgame
 
 import android.os.Bundle
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -11,6 +12,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var leftCard : ImageView
     lateinit var rightCard : ImageView
+    val randomCard = RandomCard().randomCard()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,18 +27,24 @@ class MainActivity : AppCompatActivity() {
 
         leftCard = findViewById<ImageView>(R.id.iv_card1)
 
-        val randomCard = "h2"
-        val displayLeftCard = resources.getIdentifier(randomCard, "drawable", this.packageName)
+        val displayLeftCard = resources.getIdentifier(randomCard.toString(), "drawable", this.packageName) // spara det slumpade kortet i en variabel
 
-        leftCard.setOnClickListener{
+        leftCard.setOnClickListener {    // byt vänstra kortet
             leftCard.setImageResource(displayLeftCard)
             rightCard.setImageResource(R.drawable.h2half)
+            Toast.makeText(this, randomCard, Toast.LENGTH_SHORT).show()
+
         }
 
         rightCard = findViewById<ImageView>(R.id.iv_card2)
-        rightCard.setOnClickListener{
+        rightCard.setOnClickListener {   // byt högra kortet
             leftCard.setImageResource(R.drawable.h2)
             rightCard.setImageResource(R.drawable.h2)
         }
     }
+
+    fun randomCard() {
+
+    }
+
 }

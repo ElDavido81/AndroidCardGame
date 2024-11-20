@@ -9,8 +9,8 @@ import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var leftcard : ImageView
-    lateinit var rightcard : ImageView
+    lateinit var leftCard : ImageView
+    lateinit var rightCard : ImageView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,12 +23,20 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        leftcard = findViewById(R.id.iv_card1)
-        leftcard.setOnClickListener{
-            leftcard.drawable
+        leftCard = findViewById<ImageView>(R.id.iv_card1)
+
+        val randomCard = "h2"
+        val displayLeftCard = resources.getIdentifier(randomCard, "drawable", this.packageName)
+
+        leftCard.setOnClickListener{
+            leftCard.setImageResource(displayLeftCard)
+            rightCard.setImageResource(R.drawable.h2half)
         }
 
-        rightcard = findViewById(R.id.iv_card2)
-
+        rightCard = findViewById<ImageView>(R.id.iv_card2)
+        rightCard.setOnClickListener{
+            leftCard.setImageResource(R.drawable.h2)
+            rightCard.setImageResource(R.drawable.h2)
+        }
     }
 }

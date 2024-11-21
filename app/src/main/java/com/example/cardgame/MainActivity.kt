@@ -10,14 +10,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import org.w3c.dom.Text
-import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
 
     lateinit var leftCard : ImageView
     lateinit var rightCard : ImageView
     lateinit var resultText : TextView
+    lateinit var pickText : TextView
     lateinit var newCardsButton : Button
 
 
@@ -36,6 +35,15 @@ class MainActivity : AppCompatActivity() {
         rightCard = findViewById<ImageView>(R.id.iv_card2) // visa baksidan av högra kortet
         resultText = findViewById<TextView>(R.id.result_text)
         newCardsButton = findViewById<Button>(R.id.new_cards_button)
+        pickText = findViewById<TextView>(R.id.pick_card_text)
+
+        newCardsButton.setOnClickListener {
+            leftCard.setImageResource(R.drawable.back)
+            rightCard.setImageResource(R.drawable.back)
+            resultText.visibility = View.INVISIBLE
+            newCardsButton.visibility = View.INVISIBLE
+            pickText.visibility = View.VISIBLE
+        }
 
 
         leftCard.setOnClickListener {    // välj vänstra kortet
@@ -48,7 +56,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, randomCard1+" "+randomCard2, Toast.LENGTH_SHORT).show()
 
             resultText.visibility = View.VISIBLE
+            resultText.text = "Nice!"
             newCardsButton.visibility = View.VISIBLE
+            pickText.visibility = View.INVISIBLE
 
         }
 
@@ -62,7 +72,9 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, randomCard2+" "+randomCard1, Toast.LENGTH_SHORT).show()
 
             resultText.visibility = View.VISIBLE
+            resultText.text = "Nope!"
             newCardsButton.visibility = View.VISIBLE
+            pickText.visibility = View.INVISIBLE
 
 
         }

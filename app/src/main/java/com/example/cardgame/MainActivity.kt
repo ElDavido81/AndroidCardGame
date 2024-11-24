@@ -18,6 +18,10 @@ class MainActivity : AppCompatActivity() {
     lateinit var resultText : TextView
     lateinit var pickText : TextView
     lateinit var newCardsButton : Button
+    lateinit var pointsText : TextView
+    lateinit var pointsDigit : TextView
+    var points : Int = 0
+    var highscore : Int = 0
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,10 +40,14 @@ class MainActivity : AppCompatActivity() {
         resultText = findViewById<TextView>(R.id.result_text)
         newCardsButton = findViewById<Button>(R.id.new_cards_button)
         pickText = findViewById<TextView>(R.id.pick_card_text)
+        pointsText = findViewById<TextView>(R.id.points_text_tv)
+        pointsDigit = findViewById<TextView>(R.id.points_digit_tv)
 
         newCardsButton.setOnClickListener {
             leftCard.setImageResource(R.drawable.back)
+            leftCard.alpha = 1f
             rightCard.setImageResource(R.drawable.back)
+            rightCard.alpha = 1f
             resultText.visibility = View.INVISIBLE
             newCardsButton.visibility = View.INVISIBLE
             pickText.visibility = View.VISIBLE
@@ -47,32 +55,97 @@ class MainActivity : AppCompatActivity() {
 
 
         leftCard.setOnClickListener {    // välj vänstra kortet
-            val randomCard1 = RandomCard().randomCard()
-            val randomCard2 = (RandomCard().randomCard())+"h"
-            val displayLeftCard = resources.getIdentifier(randomCard1, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för vänstra kortet
-            val displayRightCard = resources.getIdentifier(randomCard2, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för högra kortet
+            val firstCardNumber = RandomCard().randomCardNumber()
+            val firstCardSuit = RandomCard().randomCardSuit()
+            val firstCard = "$firstCardSuit$firstCardNumber"
+
+            val secondCardNumber = RandomCard().randomCardNumber()
+            val secondCardSuit = RandomCard().randomCardSuit()
+            val secondCard = "$secondCardSuit$secondCardNumber"
+
+            val displayLeftCard = resources.getIdentifier(firstCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för vänstra kortet
+            val displayRightCard = resources.getIdentifier(secondCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för högra kortet
+
             leftCard.setImageResource(displayLeftCard)
             rightCard.setImageResource(displayRightCard)
-            Toast.makeText(this, randomCard1+" "+randomCard2, Toast.LENGTH_SHORT).show()
+            rightCard.alpha = 0.5f
 
-            resultText.visibility = View.VISIBLE
-            resultText.text = "Nice!"
+            Toast.makeText(this, firstCard+" "+secondCard, Toast.LENGTH_SHORT).show()
+
+            if (firstCardNumber>secondCardNumber){
+                resultText.visibility = View.VISIBLE
+                resultText.text = "Nice!"
+                resultText.setRotation(-5f)
+                points++
+                pointsDigit.text = "$points"
+                pointsText.visibility = View.VISIBLE
+
+            } else if (firstCardNumber == secondCardNumber) {
+                resultText.visibility = View.VISIBLE
+                resultText.text = "None"
+                resultText.setRotation(0f)
+                pointsDigit.text = "$points"
+                pointsText.visibility = View.VISIBLE
+
+            } else {
+                resultText.visibility = View.VISIBLE
+                resultText.text = "Nope!"
+                resultText.setRotation(5f)
+                if (points>highscore) {
+                    highscore=points
+                }
+                points = 0
+                pointsDigit.text = "$points"
+                pointsText.visibility = View.VISIBLE
+            }
+
             newCardsButton.visibility = View.VISIBLE
             pickText.visibility = View.INVISIBLE
 
         }
 
         rightCard.setOnClickListener {   // välj högra kortet
-            val randomCard1 = (RandomCard().randomCard())+"h"
-            val randomCard2 = RandomCard().randomCard()
-            val displayLeftCard = resources.getIdentifier(randomCard1, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för vänstra kortet
-            val displayRightCard = resources.getIdentifier(randomCard2, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för högra kortet
-            leftCard.setImageResource(displayLeftCard)
-            rightCard.setImageResource(displayRightCard)
-            Toast.makeText(this, randomCard2+" "+randomCard1, Toast.LENGTH_SHORT).show()
+            val firstCardNumber = RandomCard().randomCardNumber()
+            val firstCardSuit = RandomCard().randomCardSuit()
+            val firstCard = "$firstCardSuit$firstCardNumber"
 
-            resultText.visibility = View.VISIBLE
-            resultText.text = "Nope!"
+            val secondCardNumber = RandomCard().randomCardNumber()
+            val secondCardSuit = RandomCard().randomCardSuit()
+            val secondCard = "$secondCardSuit$secondCardNumber"
+
+            val displayLeftCard = resources.getIdentifier(firstCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för vänstra kortet
+            val displayRightCard = resources.getIdentifier(secondCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för högra kortet
+            leftCard.setImageResource(displayLeftCard)
+            leftCard.alpha = 0.5f
+            rightCard.setImageResource(displayRightCard)
+            Toast.makeText(this, secondCard+" "+firstCard, Toast.LENGTH_SHORT).show()
+
+
+            if (firstCardNumber<secondCardNumber){
+                resultText.visibility = View.VISIBLE
+                resultText.text = "Nice!"
+                resultText.setRotation(-5f)
+                points++
+                pointsDigit.text = "$points"
+                pointsText.visibility = View.VISIBLE
+
+            } else if (firstCardNumber == secondCardNumber) {
+                resultText.visibility = View.VISIBLE
+                resultText.text = "None"
+                resultText.setRotation(0f)
+                pointsDigit.text = "$points"
+                pointsText.visibility = View.VISIBLE
+
+
+            } else {
+                resultText.visibility = View.VISIBLE
+                resultText.text = "Nope!"
+                resultText.setRotation(5f)
+                points = 0
+                pointsDigit.text = "$points"
+                pointsText.visibility = View.VISIBLE
+            }
+
             newCardsButton.visibility = View.VISIBLE
             pickText.visibility = View.INVISIBLE
 

@@ -1,5 +1,6 @@
 package com.example.cardgame
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
@@ -46,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         pointsDigit = findViewById<TextView>(R.id.points_digit_tv)
         highscoreText = findViewById<TextView>(R.id.highscore_tv)
 
+
         newCardsButton.setOnClickListener {
             leftCard.setImageResource(R.drawable.back)
             leftCard.alpha = 1f
@@ -82,7 +85,7 @@ class MainActivity : AppCompatActivity() {
                 points++
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
-                newCardsButton.setBackgroundColor(Color.GREEN)
+                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
                 newCardsButton.text = "New cards"
 
             } else if (firstCardNumber == secondCardNumber) {
@@ -92,7 +95,7 @@ class MainActivity : AppCompatActivity() {
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
                 newCardsButton.text = "New cards"
-                newCardsButton.setBackgroundColor(Color.BLUE)
+                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.blue))
 
             } else {
                 resultText.visibility = View.VISIBLE
@@ -107,7 +110,7 @@ class MainActivity : AppCompatActivity() {
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
                 newCardsButton.text = "New game"
-                newCardsButton.setBackgroundColor(Color.RED)
+                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
 
             }
 
@@ -140,7 +143,7 @@ class MainActivity : AppCompatActivity() {
                 points++
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
-                newCardsButton.setBackgroundColor(Color.GREEN)
+                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
                 newCardsButton.text = "New cards"
 
             } else if (firstCardNumber == secondCardNumber) {
@@ -150,7 +153,7 @@ class MainActivity : AppCompatActivity() {
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
                 newCardsButton.text = "New cards"
-
+                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.blue))
 
             } else {
                 resultText.visibility = View.VISIBLE
@@ -165,13 +168,16 @@ class MainActivity : AppCompatActivity() {
                     highscoreText.text = "Highscore: $points"
                 }
                 newCardsButton.text = "New game"
+                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
+
             }
 
             newCardsButton.visibility = View.VISIBLE
             pickText.visibility = View.INVISIBLE
 
-
         }
+
+
 
 
 

@@ -109,6 +109,7 @@
         android:textColor="@color/white"
         android:textSize="20sp"
         android:visibility="invisible"
+        android:alpha="0.7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/points_text_tv" />

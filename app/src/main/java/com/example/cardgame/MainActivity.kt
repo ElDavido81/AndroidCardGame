@@ -1,5 +1,6 @@
 package com.example.cardgame
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var newCardsButton : Button
     lateinit var pointsText : TextView
     lateinit var pointsDigit : TextView
+    lateinit var highscoreText : TextView
     var points : Int = 0
     var highscore : Int = 0
 
@@ -42,6 +44,7 @@ class MainActivity : AppCompatActivity() {
         pickText = findViewById<TextView>(R.id.pick_card_text)
         pointsText = findViewById<TextView>(R.id.points_text_tv)
         pointsDigit = findViewById<TextView>(R.id.points_digit_tv)
+        highscoreText = findViewById<TextView>(R.id.highscore_tv)
 
         newCardsButton.setOnClickListener {
             leftCard.setImageResource(R.drawable.back)
@@ -79,6 +82,8 @@ class MainActivity : AppCompatActivity() {
                 points++
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
+                newCardsButton.setBackgroundColor(Color.GREEN)
+                newCardsButton.text = "New cards"
 
             } else if (firstCardNumber == secondCardNumber) {
                 resultText.visibility = View.VISIBLE
@@ -86,6 +91,8 @@ class MainActivity : AppCompatActivity() {
                 resultText.setRotation(0f)
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
+                newCardsButton.text = "New cards"
+                newCardsButton.setBackgroundColor(Color.BLUE)
 
             } else {
                 resultText.visibility = View.VISIBLE
@@ -93,10 +100,15 @@ class MainActivity : AppCompatActivity() {
                 resultText.setRotation(5f)
                 if (points>highscore) {
                     highscore=points
+                    highscoreText.visibility = View.VISIBLE
+                    highscoreText.text = "Highscore: $points"
                 }
                 points = 0
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
+                newCardsButton.text = "New game"
+                newCardsButton.setBackgroundColor(Color.RED)
+
             }
 
             newCardsButton.visibility = View.VISIBLE
@@ -128,6 +140,8 @@ class MainActivity : AppCompatActivity() {
                 points++
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
+                newCardsButton.setBackgroundColor(Color.GREEN)
+                newCardsButton.text = "New cards"
 
             } else if (firstCardNumber == secondCardNumber) {
                 resultText.visibility = View.VISIBLE
@@ -135,6 +149,7 @@ class MainActivity : AppCompatActivity() {
                 resultText.setRotation(0f)
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
+                newCardsButton.text = "New cards"
 
 
             } else {
@@ -144,6 +159,12 @@ class MainActivity : AppCompatActivity() {
                 points = 0
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
+                if (points>highscore) {
+                    highscore=points
+                    highscoreText.visibility = View.VISIBLE
+                    highscoreText.text = "Highscore: $points"
+                }
+                newCardsButton.text = "New game"
             }
 
             newCardsButton.visibility = View.VISIBLE

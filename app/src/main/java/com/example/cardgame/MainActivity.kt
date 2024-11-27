@@ -74,14 +74,15 @@ class MainActivity : AppCompatActivity() {
 
             leftCard.setImageResource(displayLeftCard)
             rightCard.setImageResource(displayRightCard)
-            rightCard.alpha = 0.5f
+//            rightCard.alpha = 0.5f
 
-            Toast.makeText(this, firstCard+" "+secondCard, Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, firstCard+" "+secondCard, Toast.LENGTH_SHORT).show()
 
             if (firstCardNumber>secondCardNumber){
                 resultText.visibility = View.VISIBLE
                 resultText.text = "Nice!"
                 resultText.setRotation(-5f)
+                rightCard.alpha = 0.5f
                 points++
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
@@ -101,6 +102,7 @@ class MainActivity : AppCompatActivity() {
                 resultText.visibility = View.VISIBLE
                 resultText.text = "Nope!"
                 resultText.setRotation(5f)
+                leftCard.alpha = 0.5f
                 if (points>highscore) {
                     highscore=points
                     highscoreText.visibility = View.VISIBLE
@@ -131,15 +133,17 @@ class MainActivity : AppCompatActivity() {
             val displayLeftCard = resources.getIdentifier(firstCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för vänstra kortet
             val displayRightCard = resources.getIdentifier(secondCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för högra kortet
             leftCard.setImageResource(displayLeftCard)
-            leftCard.alpha = 0.5f
+//            leftCard.alpha = 0.5f
             rightCard.setImageResource(displayRightCard)
-            Toast.makeText(this, secondCard+" "+firstCard, Toast.LENGTH_SHORT).show()
+
+//            Toast.makeText(this, secondCard+" "+firstCard, Toast.LENGTH_SHORT).show()
 
 
             if (firstCardNumber<secondCardNumber){
                 resultText.visibility = View.VISIBLE
                 resultText.text = "Nice!"
                 resultText.setRotation(-5f)
+                leftCard.alpha = 0.5f
                 points++
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE
@@ -159,6 +163,7 @@ class MainActivity : AppCompatActivity() {
                 resultText.visibility = View.VISIBLE
                 resultText.text = "Nope!"
                 resultText.setRotation(5f)
+                rightCard.alpha = 0.5f
                 points = 0
                 pointsDigit.text = "$points"
                 pointsText.visibility = View.VISIBLE

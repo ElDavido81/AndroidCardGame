@@ -45,6 +45,7 @@ class GameActivity : AppCompatActivity() {
 
 
         newCardsButton.setOnClickListener {
+
             leftCard.setImageResource(R.drawable.back)
             leftCard.alpha = 1f
             rightCard.setImageResource(R.drawable.back)
@@ -67,22 +68,27 @@ class GameActivity : AppCompatActivity() {
             val displayLeftCard = resources.getIdentifier(firstCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för vänstra kortet
             val displayRightCard = resources.getIdentifier(secondCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för högra kortet
 
+
             leftCard.setImageResource(displayLeftCard)
             rightCard.setImageResource(displayRightCard)
 //            rightCard.alpha = 0.5f
-
 //            Toast.makeText(this, firstCard+" "+secondCard, Toast.LENGTH_SHORT).show()
 
             if (firstCardNumber>secondCardNumber){
-                resultText.visibility = View.VISIBLE
-                resultText.text = "Nice!"
-                resultText.setRotation(-5f)
-                rightCard.alpha = 0.5f
+
+                val flipCards = FlipCards(this)
+                flipCards.leftCard(resultText, rightCard, points, pointsDigit, pointsText, newCardsButton)
                 points++
-                pointsDigit.text = "$points"
-                pointsText.visibility = View.VISIBLE
-                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
-                newCardsButton.text = "New cards"
+
+//                resultText.visibility = View.VISIBLE
+//                resultText.text = "Nice!"
+//                resultText.setRotation(-5f)
+//                rightCard.alpha = 0.5f
+//                points++
+//                pointsDigit.text = "$points"
+//                pointsText.visibility = View.VISIBLE
+//                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
+//                newCardsButton.text = "New cards"
 
             } else if (firstCardNumber == secondCardNumber) {
                 resultText.visibility = View.VISIBLE

@@ -43,23 +43,12 @@ class GameActivity : AppCompatActivity() {
         highscoreText = findViewById(R.id.highscore_tv)
 
         val flipCards = FlipCards(this)
+        val randomCard = RandomCard()
 
-
-        fun runGame() {
+//        fun runGame() {
             points = 0
             pointsDigit.text = "$points"
-
-
-            newCardsButton.setOnClickListener {
-
-                leftCard.setImageResource(R.drawable.back)
-                leftCard.alpha = 1f
-                rightCard.setImageResource(R.drawable.back)
-                rightCard.alpha = 1f
-                resultText.visibility = View.INVISIBLE
-                newCardsButton.visibility = View.INVISIBLE
-                pickText.visibility = View.VISIBLE
-            }
+            pointsText.visibility = View.VISIBLE
 
 
             leftCard.setOnClickListener {    // välj vänstra kortet
@@ -71,56 +60,29 @@ class GameActivity : AppCompatActivity() {
                 val secondCardSuit = RandomCard().randomCardSuit()
                 val secondCard = "$secondCardSuit$secondCardNumber"
 
-                val displayLeftCard = resources.getIdentifier(
-                    firstCard,
-                    "drawable",
-                    this.packageName
-                ) // spara det slumpade kortet i en variabeln för vänstra kortet
-                val displayRightCard = resources.getIdentifier(
-                    secondCard,
-                    "drawable",
-                    this.packageName
-                ) // spara det slumpade kortet i en variabeln för högra kortet
-
+                val displayLeftCard = randomCard.getCardFromMap(firstCard)
+                val displayRightCard = randomCard.getCardFromMap(secondCard)
 
                 leftCard.setImageResource(displayLeftCard)
                 rightCard.setImageResource(displayRightCard)
 
-
                 if (firstCardNumber > secondCardNumber) {
-
                     points++
-                    flipCards.leftCardCorrect(
-                        resultText,
-                        rightCard,
-                        points,
-                        pointsDigit,
-                        pointsText,
-                        newCardsButton
-                    )
+                    flipCards.leftCardCorrect(resultText, rightCard, points, pointsDigit, pointsText, newCardsButton)
 
                 } else if (firstCardNumber == secondCardNumber) {
-
                     flipCards.cardDraw(resultText, points, pointsDigit, pointsText, newCardsButton)
 
-
                 } else {
-                    flipCards.leftCardWrong(
-                        resultText,
-                        leftCard,
-                        pointsDigit,
-                        pointsText,
-                        newCardsButton,
-                        points
-                    )
+                    flipCards.leftCardWrong(resultText, leftCard, pointsDigit, pointsText, newCardsButton, points)
 
                     if (points > highscore) {
-                        highscore = points
-                        highscoreText.visibility = View.VISIBLE
-                        highscoreText.text = "Highscore: $points"
+                        newHighScore()
+//                        highscore = points
+//                        highscoreText.visibility = View.VISIBLE
+//                        highscoreText.text = "Highscore: $points"
                     }
                     points = 0
-
                 }
 
                 newCardsButton.visibility = View.VISIBLE
@@ -129,71 +91,69 @@ class GameActivity : AppCompatActivity() {
             }
 
             rightCard.setOnClickListener {   // välj högra kortet
-                val firstCardNumber = RandomCard().randomCardNumber()
-                val firstCardSuit = RandomCard().randomCardSuit()
-                val firstCard = "$firstCardSuit$firstCardNumber"
+                var firstCard: String
+                var secondCard: String
+                var secondCardNumber: Int
+                var firstCardNumber: Int
 
-                val secondCardNumber = RandomCard().randomCardNumber()
-                val secondCardSuit = RandomCard().randomCardSuit()
-                val secondCard = "$secondCardSuit$secondCardNumber"
+                do {
+                    firstCardNumber = randomCard.randomCardNumber()
+                    val firstCardSuit = randomCard.randomCardSuit()
+                    firstCard = "$firstCardSuit$firstCardNumber"
 
-                val displayLeftCard = resources.getIdentifier(firstCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för vänstra kortet
-                val displayRightCard = resources.getIdentifier(secondCard,"drawable", this.packageName) // spara det slumpade kortet i en variabeln för högra kortet
+                    secondCardNumber = randomCard.randomCardNumber()
+                    val secondCardSuit = randomCard.randomCardSuit()
+                    secondCard = "$secondCardSuit$secondCardNumber"
+                } while (firstCard == secondCard)
+
+                    val displayLeftCard = randomCard.getCardFromMap(firstCard)
+                    val displayRightCard = randomCard.getCardFromMap(secondCard)
+
                 leftCard.setImageResource(displayLeftCard)
                 rightCard.setImageResource(displayRightCard)
 
-//            Toast.makeText(this, secondCard+" "+firstCard, Toast.LENGTH_SHORT).show()
-
-
                 if (firstCardNumber < secondCardNumber) {
-
                     points++
-                    flipCards.rightCardCorrect(
-                        resultText,
-                        leftCard,
-                        points,
-                        pointsDigit,
-                        pointsText,
-                        newCardsButton
-                    )
+                    flipCards.rightCardCorrect(resultText, leftCard, points, pointsDigit, pointsText, newCardsButton)
 
                 } else if (firstCardNumber == secondCardNumber) {
-
                     flipCards.cardDraw(resultText, points, pointsDigit, pointsText, newCardsButton)
 
-
                 } else {
-                    flipCards.rightCardWrong(
-                        resultText,
-                        rightCard,
-                        pointsDigit,
-                        pointsText,
-                        newCardsButton,
-                        points
-                    )
+                    flipCards.rightCardWrong(resultText, rightCard, pointsDigit, pointsText, newCardsButton, points)
                     if (points > highscore) {
-                        highscore = points
-                        highscoreText.visibility = View.VISIBLE
-                        highscoreText.text = "Highscore: $points"
+                        newHighScore()
+//                        highscore = points
+//                        highscoreText.visibility = View.VISIBLE
+//                        highscoreText.text = "Highscore: $points"
                     }
-
                     points = 0
-
-
-//                newCardsButton.text = "New game"
-//                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
-
                 }
-
                 newCardsButton.visibility = View.VISIBLE
                 pickText.visibility = View.INVISIBLE
-
             }
 
+        newCardsButton.setOnClickListener {
+            resetCards()
         }
 
-        runGame()
+    }
 
+
+    fun resetCards() {
+        leftCard.setImageResource(R.drawable.back)
+        leftCard.alpha = 1f
+        rightCard.setImageResource(R.drawable.back)
+        rightCard.alpha = 1f
+        resultText.visibility = View.INVISIBLE
+        newCardsButton.visibility = View.INVISIBLE
+        pickText.visibility = View.VISIBLE
+    }
+
+    fun newHighScore() {
+        highscore = points
+        highscoreText.visibility = View.VISIBLE
+        highscoreText.text = "Highscore: $points"
     }
 
 }

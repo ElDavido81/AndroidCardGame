@@ -48,21 +48,21 @@ class RandomCard {
         "c14" to R.drawable.c14,
 
         "s2" to R.drawable.s2,
-//        "s3" to R.drawable.s3,
-//        "s4" to R.drawable.s4,
-//        "s5" to R.drawable.s5,
-//        "s6" to R.drawable.s6,
-//        "s7" to R.drawable.s7,
-//        "s8" to R.drawable.s8,
-//        "s9" to R.drawable.s9,
-//        "s10" to R.drawable.s10,
-//        "s11" to R.drawable.s11,
-//        "s12" to R.drawable.s12,
-//        "s13" to R.drawable.s13,
+        "s3" to R.drawable.s3,
+        "s4" to R.drawable.s4,
+        "s5" to R.drawable.s5,
+        "s6" to R.drawable.s6,
+        "s7" to R.drawable.s7,
+        "s8" to R.drawable.s8,
+        "s9" to R.drawable.s9,
+        "s10" to R.drawable.s10,
+        "s11" to R.drawable.s11,
+        "s12" to R.drawable.s12,
+        "s13" to R.drawable.s13,
         "s14" to R.drawable.s14,
     )
 
-    fun cardsSuits() {
+        fun cardsSuits() {
         cardList.add("h")
         cardList.add("d")
         cardList.add("c")
@@ -81,15 +81,8 @@ class RandomCard {
             return cardSuit
         }
 
-        fun getRandomCard(): String {
-            val cardNumber = randomCardNumber()
-            val cardSuit = randomCardSuit()
-            return "$cardSuit$cardNumber"
-        }
-
         fun getCardFromMap(card: String): Int {
             return deckOfCards[card]?: throw IllegalArgumentException("No image")
         }
 
     }
-

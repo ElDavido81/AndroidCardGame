@@ -51,7 +51,6 @@ fun leftCardCorrect(resultText: TextView, rightCard: ImageView, points: Int, poi
         pointsText.visibility = View.VISIBLE
         newCardsButton.setBackgroundColor(ContextCompat.getColor(context, R.color.green))
         newCardsButton.text = "New cards"
-
     }
 
     fun rightCardWrong(resultText: TextView, rightCard: ImageView, pointsDigit: TextView, pointsText: TextView, newCardsButton: Button, points: Int) {

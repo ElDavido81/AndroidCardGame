@@ -33,14 +33,14 @@ class GameActivity : AppCompatActivity() {
             insets
         }
 
-        leftCard = findViewById<ImageView>(R.id.iv_card1) // visa baksidan av vänstra kortet
-        rightCard = findViewById<ImageView>(R.id.iv_card2) // visa baksidan av högra kortet
-        resultText = findViewById<TextView>(R.id.result_text)
-        newCardsButton = findViewById<Button>(R.id.new_cards_button)
-        pickText = findViewById<TextView>(R.id.pick_card_text)
-        pointsText = findViewById<TextView>(R.id.points_text_tv)
-        pointsDigit = findViewById<TextView>(R.id.points_digit_tv)
-        highscoreText = findViewById<TextView>(R.id.highscore_tv)
+        leftCard = findViewById(R.id.iv_card1) // visa baksidan av vänstra kortet
+        rightCard = findViewById(R.id.iv_card2) // visa baksidan av högra kortet
+        resultText = findViewById(R.id.result_text)
+        newCardsButton = findViewById(R.id.new_cards_button)
+        pickText = findViewById(R.id.pick_card_text)
+        pointsText = findViewById(R.id.points_text_tv)
+        pointsDigit = findViewById(R.id.points_digit_tv)
+        highscoreText = findViewById(R.id.highscore_tv)
 
         val flipCards = FlipCards(this)
 
@@ -86,9 +86,6 @@ class GameActivity : AppCompatActivity() {
                 leftCard.setImageResource(displayLeftCard)
                 rightCard.setImageResource(displayRightCard)
 
-//            rightCard.alpha = 0.5f
-//            Toast.makeText(this, firstCard+" "+secondCard, Toast.LENGTH_SHORT).show()
-
 
                 if (firstCardNumber > secondCardNumber) {
 
@@ -102,27 +99,10 @@ class GameActivity : AppCompatActivity() {
                         newCardsButton
                     )
 
-//                resultText.visibility = View.VISIBLE
-//                resultText.text = "Nice!"
-//                resultText.setRotation(-5f)
-//                rightCard.alpha = 0.5f
-//                points++
-//                pointsDigit.text = "$points"
-//                pointsText.visibility = View.VISIBLE
-//                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
-//                newCardsButton.text = "New cards"
-
                 } else if (firstCardNumber == secondCardNumber) {
 
                     flipCards.cardDraw(resultText, points, pointsDigit, pointsText, newCardsButton)
 
-//                resultText.visibility = View.VISIBLE
-//                resultText.text = "None"
-//                resultText.setRotation(0f)
-//                pointsDigit.text = "$points"
-//                pointsText.visibility = View.VISIBLE
-//                newCardsButton.text = "New cards"
-//                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.blue))
 
                 } else {
                     flipCards.leftCardWrong(
@@ -134,21 +114,12 @@ class GameActivity : AppCompatActivity() {
                         points
                     )
 
-//                resultText.visibility = View.VISIBLE
-//                resultText.text = "Nope!"
-//                resultText.setRotation(5f)
-//                leftCard.alpha = 0.5f
                     if (points > highscore) {
                         highscore = points
                         highscoreText.visibility = View.VISIBLE
                         highscoreText.text = "Highscore: $points"
                     }
                     points = 0
-
-//                pointsDigit.text = "$points"
-//                pointsText.visibility = View.VISIBLE
-//                newCardsButton.text = "New game"
-//                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.red))
 
                 }
 
@@ -166,16 +137,8 @@ class GameActivity : AppCompatActivity() {
                 val secondCardSuit = RandomCard().randomCardSuit()
                 val secondCard = "$secondCardSuit$secondCardNumber"
 
-                val displayLeftCard = resources.getIdentifier(
-                    firstCard,
-                    "drawable",
-                    this.packageName
-                ) // spara det slumpade kortet i en variabeln för vänstra kortet
-                val displayRightCard = resources.getIdentifier(
-                    secondCard,
-                    "drawable",
-                    this.packageName
-                ) // spara det slumpade kortet i en variabeln för högra kortet
+                val displayLeftCard = resources.getIdentifier(firstCard, "drawable", this.packageName) // spara det slumpade kortet i en variabeln för vänstra kortet
+                val displayRightCard = resources.getIdentifier(secondCard,"drawable", this.packageName) // spara det slumpade kortet i en variabeln för högra kortet
                 leftCard.setImageResource(displayLeftCard)
                 rightCard.setImageResource(displayRightCard)
 
@@ -194,26 +157,10 @@ class GameActivity : AppCompatActivity() {
                         newCardsButton
                     )
 
-//                resultText.visibility = View.VISIBLE
-//                resultText.text = "Nice!"
-//                resultText.setRotation(-5f)
-//                leftCard.alpha = 0.5f
-//                points++
-//                pointsDigit.text = "$points"
-//                pointsText.visibility = View.VISIBLE
-//                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.green))
-//                newCardsButton.text = "New cards"
-
                 } else if (firstCardNumber == secondCardNumber) {
 
                     flipCards.cardDraw(resultText, points, pointsDigit, pointsText, newCardsButton)
-//                resultText.visibility = View.VISIBLE
-//                resultText.text = "None"
-//                resultText.setRotation(0f)
-//                pointsDigit.text = "$points"
-//                pointsText.visibility = View.VISIBLE
-//                newCardsButton.text = "New cards"
-//                newCardsButton.setBackgroundColor(ContextCompat.getColor(this, R.color.blue))
+
 
                 } else {
                     flipCards.rightCardWrong(
@@ -224,13 +171,6 @@ class GameActivity : AppCompatActivity() {
                         newCardsButton,
                         points
                     )
-//                resultText.visibility = View.VISIBLE
-//                resultText.text = "Nope!"
-//                resultText.setRotation(5f)
-//                rightCard.alpha = 0.5f
-//                points = 0
-//                pointsDigit.text = "$points"
-//                pointsText.visibility = View.VISIBLE
                     if (points > highscore) {
                         highscore = points
                         highscoreText.visibility = View.VISIBLE

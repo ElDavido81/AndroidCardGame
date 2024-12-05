@@ -2,7 +2,9 @@ package com.example.cardgame
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -22,25 +24,19 @@ lateinit var startGame : Button
             insets
         }
 
-        fun startGame() {
-
-            val intent = Intent(this, GameActivity::class.java)
-
-            startActivity(intent)
-
-        }
-
-            startGame = findViewById(R.id.btn_start_game)
+        startGame = findViewById(R.id.btn_start_game)
         startGame.setOnClickListener{
-
-        startGame()
-
+            startGame()
+            
         }
 
+    }
 
+    fun startGame() {
 
+        val intent = Intent(this, GameActivity::class.java)
 
-
+        startActivity(intent)
 
     }
 
